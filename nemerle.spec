@@ -30,7 +30,7 @@ to imperative features easy, and thus is easy to learn.
 Nemerle jest nowym jêzykiem funkcjonalnym zaprojektowanym od pocz±tku 
 z my¶l± o platformie .NET. Nemerle wspiera programowanie obiektowe 
 i imperatywne, typy wariantowe, dopasowanie wzorca, funkcje wy¿szych
-rzêdów oraz pote¿ny system makr. Sk³adnia Nemerle jest prosta,
+rzêdów oraz potê¿ny system makr. Sk³adnia Nemerle jest prosta,
 przypomina trochê C#. Nemerle umo¿liwia ³atwy dostêp do swych
 imperatywnych oraz obiektowych cech, co powinno u³atwiæ uczenie siê
 go.
