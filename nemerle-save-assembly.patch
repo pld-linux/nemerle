@@ -1,0 +1,74 @@
+--- nemerle-0.2.1/ncc/cgil.n~	2004-10-14 16:32:04.439446912 +0200
++++ nemerle-0.2.1/ncc/cgil.n	2004-10-14 16:35:46.969618795 +0200
+@@ -36,6 +36,7 @@
+   
+   using System.Reflection;
+   using System.Reflection.Emit;
++  using System.IO;
+ 
+   using NC = Nemerle.Compiler;
+   using SR = System.Reflection;
+@@ -50,9 +51,7 @@
+     public this (target_exe : bool, output_file_name : string, assem_name : AssemblyName)
+     {
+       def basename (s : string) {
+-        def dot = s.LastIndexOf ('.');
+-        def s = if (dot == -1) s else s.Substring (0, dot);
+-        strip_directory (s)
++        Path.GetFileNameWithoutExtension (s)
+       };
+    
+       _output_file_name = output_file_name;
+@@ -63,7 +62,9 @@
+ 
+       this._assembly_builder = 
+         System.AppDomain.CurrentDomain.DefineDynamicAssembly 
+-          (this._assembly_name, AssemblyBuilderAccess.RunAndSave);
++          (this._assembly_name,
++           AssemblyBuilderAccess.RunAndSave,
++           Path.GetDirectoryName (Path.GetFullPath (_output_file_name)));
+ 
+       /* we can embed resources only on mono */
+       if (SystemType.AssemblyBuilder_EmbedResourceFile != null)                    
+@@ -104,7 +105,7 @@
+       /* create a dynamic module */
+       this._module_builder = 
+         this._assembly_builder.DefineDynamicModule ("Module_" + basename (output_file_name), 
+-                                                    strip_directory (output_file_name), 
++                                                    Path.GetFileName (output_file_name), 
+                                                     true); // FIXME
+ 
+       when (target_exe) {
+@@ -185,14 +186,7 @@
+       };
+ 
+       // save the assembly
+-      // we cannot save file with directory (see Save description)
+-      _assembly_builder.Save (strip_directory (_output_file_name));
+-      when (strip_directory (_output_file_name) != _output_file_name) {
+-        when (System.IO.File.Exists (_output_file_name))
+-          System.IO.File.Delete (_output_file_name);
+-          
+-        System.IO.File.Move (strip_directory (_output_file_name), _output_file_name)
+-      }
++      _assembly_builder.Save (Path.GetFileName (_output_file_name));
+     }
+ 
+     /**
+@@ -207,16 +201,6 @@
+ 
+     /* -- PRIVATE METHODS -------------------------------------------------- */
+ 
+-    private strip_directory (s : string) : string
+-    {
+-      def slash =
+-        if (s.LastIndexOf ('/') > s.LastIndexOf ('\\')) 
+-          s.LastIndexOf ('/')
+-        else
+-          s.LastIndexOf ('\\');
+-      s.Substring (slash + 1)
+-    }
+-    
+     /**
+      *
+      */
