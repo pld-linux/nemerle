@@ -38,6 +38,8 @@ Summary:	Nemerle runtime environment
 Summary(pl):	¦rodowisko uruchomieniowe jêzyka Nemerle
 BuildArch:	noarch
 Group:		Libraries
+Requires(post):	mono >= 0.29
+Requires:	mono >= 0.29
 
 %description libs
 Libraries needed to run programs written in Nemerle.
