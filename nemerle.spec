@@ -1,15 +1,14 @@
-%define _rev 1418
 Summary:	Nemerle compiler
 Summary(pl):	Kompilator jêzyka Nemerle
 Name:		nemerle
-Version:	0.0.1.%{_rev}
+Version:	0.0.1522
 Release:	1
 Epoch:		0
 License:	BSD
 Group:		Development/Languages
 Vendor:		Nemerle Development Team <feedback@nemerle.org>
-Source0:	http://nemerle.org/download/%{name}-%{_rev}.tar.gz
-# Source0-md5:	f728c023ba373f2c55586e84c4086b39
+Source0:	http://nemerle.org/download/%{name}-%{version}.tar.gz
+# Source0-md5:	71eb88d1b342024ebed96875b53100a5
 BuildArch:	noarch
 URL:		http://nemerle.org/
 Requires(post):	mono >= 0.29
@@ -48,26 +47,32 @@ Libraries needed to run programs written in Nemerle.
 Biblioteki niezbêdne do uruchamiania programów napisanych w Nemerle.
 
 %prep
-%setup -q -n %{name}-%{_rev}
+%setup -q
 
 %build
+./configure \
+	--ignore-errors \
+	--prefix=%{_prefix} \
+	--bindir=%{_bindir} \
+	--libdir=%{_libdir} \
+	--mandir=%{_mandir}/man1
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir}}
 
-install boot/*.dll $RPM_BUILD_ROOT%{_libdir}
-install lib/aliases.n $RPM_BUILD_ROOT%{_libdir}
-install boot/ncc.exe $RPM_BUILD_ROOT%{_bindir}
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+mv $RPM_BUILD_ROOT%{_bindir}/ncc{,.exe}
+
+cat > $RPM_BUILD_ROOT%{_bindir}/ncc <<EOF
+#!/bin/sh
+exec mono %{_bindir}/ncc.exe "\$@"
+EOF
 
 for f in $RPM_BUILD_ROOT%{_bindir}/*.exe $RPM_BUILD_ROOT%{_libdir}/*.dll ; do
 	touch $f.so
 done
-
-cat > $RPM_BUILD_ROOT%{_bindir}/ncc <<EOF
-#!/bin/sh
-mono %{_bindir}/ncc.exe "\$@"
-EOF
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -82,12 +87,12 @@ mono --aot %{_libdir}/Nemerle.dll || :
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS README
+%doc AUTHORS README doc/html/*
 %attr(755,root,root) %{_bindir}/ncc
 %attr(755,root,root) %{_bindir}/ncc.exe
 %attr(755,root,root) %{_libdir}/stdmacros.dll
 %attr(755,root,root) %{_libdir}/Nemerle.Compiler.dll
-%{_libdir}/aliases.n
+%{_mandir}/man1/*
 %ghost %attr(755,root,root) %{_bindir}/ncc.exe.so
 %ghost %attr(755,root,root) %{_libdir}/stdmacros.dll.so
 %ghost %attr(755,root,root) %{_libdir}/Nemerle.Compiler.dll.so
