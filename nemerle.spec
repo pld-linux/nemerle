@@ -1,14 +1,14 @@
 Summary:	Nemerle compiler
 Summary(pl):	Kompilator jêzyka Nemerle
 Name:		nemerle
-Version:	0.1.2
+Version:	0.1.2.1
 Release:	1
 Epoch:		0
 License:	BSD
 Group:		Development/Languages
 Vendor:		Nemerle Development Team <feedback@nemerle.org>
 Source0:	http://nemerle.org/download/%{name}-%{version}.tar.gz
-# Source0-md5:	2fb625ba4dc18063aff21754e00bb000
+# Source0-md5:	d4d71e607ef352615855f13e36117035
 BuildArch:	noarch
 URL:		http://nemerle.org/
 Requires(post):	mono >= 0.31
