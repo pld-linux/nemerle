@@ -9,7 +9,8 @@ Group:		Development/Languages
 Vendor:		Nemerle Development Team <feedback@nemerle.org>
 Source0:	http://nemerle.org/download/%{name}-%{version}.tar.bz2
 # Source0-md5:	021fd226df9816f79a912df6bbe70cc3
-BuildArch:	noarch
+# uses %{_libdir}, so seems not to be noarch
+#BuildArch:	noarch
 URL:		http://nemerle.org/
 Requires(post):	mono >= 0.31
 Requires:	mono >= 0.31
