@@ -14,6 +14,7 @@ BuildArch:	noarch
 URL:		http://nemerle.org/
 Requires(post):	mono >= 0.29
 Requires:	mono >= 0.29
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
