@@ -1,20 +1,20 @@
+# TODO: antlr should install antlr.runtime.dll, and this
+# package should use it
 Summary:	Nemerle compiler
 Summary(pl):	Kompilator jêzyka Nemerle
 Name:		nemerle
-Version:	0.2.1
-Release:	3
+Version:	0.2.9
+Release:	1
 Epoch:		0
 License:	BSD
 Group:		Development/Languages
 Vendor:		Nemerle Development Team <feedback@nemerle.org>
 Source0:	http://nemerle.org/download/%{name}-%{version}.tar.bz2
-# Source0-md5:	6108697ad6a8ba434f5a98f34b8eb02e
-Patch0:		%{name}-disable-aot.patch
-Patch1:		%{name}-save-assembly.patch
+# Source0-md5:	9e7ba4b2fae39b4cf30b7b2852bca934
 URL:		http://nemerle.org/
-BuildRequires:	mono-devel >= 1.0
+BuildRequires:	mono-devel >= 1.1.4
 BuildRequires:	pkgconfig
-Requires:	mono-devel >= 1.0
+Requires:	mono-devel >= 1.1.4
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 ExcludeArch:	alpha
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -49,8 +49,6 @@ Biblioteki niezbêdne do uruchamiania programów napisanych w Nemerle.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
 
 %build
 ./configure \
@@ -58,12 +56,12 @@ Biblioteki niezbêdne do uruchamiania programów napisanych w Nemerle.
 	--bindir=%{_bindir} \
 	--libdir=%{_libdir} \
 	--mandir=%{_mandir}/man1 \
-%ifnarch %{ix86}
 	--disable-aot \
-%endif
 	--net-engine=mono
 %{__make}
+%{__make} -C tools/cs2n/
 %{__make} check
+%{__make} -C snippets clean
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -82,8 +80,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc NEWS AUTHORS README doc/html misc/*.{vim,el}
 %attr(755,root,root) %{_bindir}/ncc
 %attr(755,root,root) %{_bindir}/ncc.exe
+%attr(755,root,root) %{_bindir}/cs2n
+%attr(755,root,root) %{_bindir}/cs2n.exe
 %{_libdir}/mono/nemerle
 %{_libdir}/mono/gac/Nemerle.*
+%{_libdir}/mono/gac/antlr*
 %{_mandir}/man1/*
 %{_examplesdir}/%{name}-%{version}
 
