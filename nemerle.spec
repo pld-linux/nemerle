@@ -8,7 +8,7 @@ License:	BSD
 Group:		Development/Languages
 Vendor:		Nemerle Development Team <feedback@nemerle.org>
 Source0:	http://nemerle.org/download/%{name}-%{version}.tar.bz2
-# Source0-md5:	6108697ad6d8ba434f5a98334b8eb02e
+# Source0-md5:	6108697ad6a8ba434f5a98f34b8eb02e
 Patch0:		%{name}-disable-aot.patch
 Patch1:		%{name}-save-assembly.patch
 URL:		http://nemerle.org/
