@@ -1,14 +1,14 @@
 Summary:	Nemerle compiler
 Summary(pl):	Kompilator jêzyka Nemerle
 Name:		nemerle
-Version:	0.2.0
+Version:	0.2.1
 Release:	1
 Epoch:		0
 License:	BSD
 Group:		Development/Languages
 Vendor:		Nemerle Development Team <feedback@nemerle.org>
 Source0:	http://nemerle.org/download/%{name}-%{version}.tar.bz2
-# Source0-md5:	ddc6154a04d126079fc05c6c80bc06e4
+# Source0-md5:	6108697ad6a8ba434f5a98f34b8eb02e
 URL:		http://nemerle.org/
 Requires:	mono-devel >= 1.0
 BuildRequires:	mono-devel >= 1.0
@@ -54,6 +54,8 @@ Biblioteki niezbêdne do uruchamiania programów napisanych w Nemerle.
 	--libdir=%{_libdir} \
 	--mandir=%{_mandir}/man1 \
 	--net-engine=mono
+
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
