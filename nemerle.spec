@@ -1,19 +1,18 @@
 Summary:	Nemerle compiler
 Summary(pl):	Kompilator jêzyka Nemerle
 Name:		nemerle
-Version:	0.1.4
-Release:	2
+Version:	0.2.0
+Release:	1
 Epoch:		0
 License:	BSD
 Group:		Development/Languages
 Vendor:		Nemerle Development Team <feedback@nemerle.org>
 Source0:	http://nemerle.org/download/%{name}-%{version}.tar.bz2
-# Source0-md5:	021fd226df9816f79a912df6bbe70cc3
-# uses %{_libdir}, so seems not to be noarch
-#BuildArch:	noarch
+# Source0-md5:	ddc6154a04d126079fc05c6c80bc06e4
 URL:		http://nemerle.org/
-Requires(post):	mono >= 0.31
-Requires:	mono >= 0.31
+Requires:	mono-devel >= 1.0
+BuildRequires:	mono-devel >= 1.0
+BuildRequires:	pkgconfig
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -36,10 +35,8 @@ go.
 %package libs
 Summary:	Nemerle runtime environment
 Summary(pl):	¦rodowisko uruchomieniowe jêzyka Nemerle
-BuildArch:	noarch
 Group:		Libraries
-Requires(post):	mono >= 0.29
-Requires:	mono >= 0.29
+Requires:	mono >= 1.0
 
 %description libs
 Libraries needed to run programs written in Nemerle.
@@ -52,11 +49,11 @@ Biblioteki niezbêdne do uruchamiania programów napisanych w Nemerle.
 
 %build
 ./configure \
-	--ignore-errors \
 	--prefix=%{_prefix} \
 	--bindir=%{_bindir} \
 	--libdir=%{_libdir} \
-	--mandir=%{_mandir}/man1
+	--mandir=%{_mandir}/man1 \
+	--net-engine=mono
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -64,39 +61,23 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-for f in $RPM_BUILD_ROOT%{_bindir}/*.exe $RPM_BUILD_ROOT%{_libdir}/*.dll ; do
-	touch $f.so
-done
-
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 cp -r snippets/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-mono --aot %{_libdir}/Nemerle.Compiler.dll || :
-mono --aot %{_libdir}/Nemerle.Macros.dll || :
-mono --aot %{_bindir}/ncc.exe || :
-
-%post libs
-mono --aot %{_libdir}/Nemerle.dll || :
-
 %files
 %defattr(644,root,root,755)
 %doc NEWS AUTHORS README doc/html misc/*.{vim,el}
 %attr(755,root,root) %{_bindir}/ncc
 %attr(755,root,root) %{_bindir}/ncc.exe
-%attr(755,root,root) %{_libdir}/Nemerle.Macros.dll
-%attr(755,root,root) %{_libdir}/Nemerle.Compiler.dll
-%ghost %attr(755,root,root) %{_bindir}/ncc.exe.so
-%ghost %attr(755,root,root) %{_libdir}/Nemerle.Macros.dll.so
-%ghost %attr(755,root,root) %{_libdir}/Nemerle.Compiler.dll.so
+%{_libdir}/mono/nemerle
+%{_libdir}/mono/gac/Nemerle.*
 %{_mandir}/man1/*
 %{_examplesdir}/%{name}-%{version}
 
 %files libs
 %defattr(644,root,root,755)
 %doc COPYRIGHT
-%attr(755,root,root) %{_libdir}/Nemerle.dll
-%ghost %attr(755,root,root) %{_libdir}/Nemerle.dll.so
+%{_libdir}/mono/gac/Nemerle
