@@ -3,16 +3,17 @@
 Summary:	Nemerle compiler
 Summary(pl):	Kompilator jêzyka Nemerle
 Name:		nemerle
-Version:	0.2.9
+Version:	0.2.10
 Release:	1
 Epoch:		0
 License:	BSD
 Group:		Development/Languages
 Vendor:		Nemerle Development Team <feedback@nemerle.org>
 Source0:	http://nemerle.org/download/%{name}-%{version}.tar.bz2
-# Source0-md5:	9e7ba4b2fae39b4cf30b7b2852bca934
+# Source0-md5:	624a5ddc352b402a9d6ced97841c02d2
 URL:		http://nemerle.org/
 BuildRequires:	mono-devel >= 1.1.4
+BuildRequires:  nant
 BuildRequires:	pkgconfig
 Requires:	mono-devel >= 1.1.4
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -59,7 +60,6 @@ Biblioteki niezbêdne do uruchamiania programów napisanych w Nemerle.
 	--disable-aot \
 	--net-engine=mono
 %{__make}
-%{__make} -C tools/cs2n/
 %{__make} check
 %{__make} -C snippets clean
 
@@ -85,7 +85,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/mono/nemerle
 %{_libdir}/mono/gac/Nemerle.*
 %{_libdir}/mono/gac/antlr*
+%{_datadir}/NAnt/bin/Nemerle.NAnt.Tasks.*
 %{_mandir}/man1/*
+%{_pkgconfigdir}/nemerle.pc
 %{_examplesdir}/%{name}-%{version}
 
 %files libs
