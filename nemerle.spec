@@ -2,7 +2,7 @@ Summary:	Nemerle compiler
 Summary(pl):	Kompilator jêzyka Nemerle
 Name:		nemerle
 Version:	0.1.4
-Release:	1
+Release:	2
 Epoch:		0
 License:	BSD
 Group:		Development/Languages
@@ -62,13 +62,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-mv $RPM_BUILD_ROOT%{_bindir}/ncc{,.exe}
-
-cat > $RPM_BUILD_ROOT%{_bindir}/ncc <<EOF
-#!/bin/sh
-exec mono %{_bindir}/ncc.exe "\$@"
-EOF
 
 for f in $RPM_BUILD_ROOT%{_bindir}/*.exe $RPM_BUILD_ROOT%{_libdir}/*.dll ; do
 	touch $f.so
