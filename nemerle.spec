@@ -10,10 +10,11 @@ Vendor:		Nemerle Development Team <feedback@nemerle.org>
 Source0:	http://nemerle.org/download/%{name}-%{version}.tar.bz2
 # Source0-md5:	6108697ad6a8ba434f5a98f34b8eb02e
 URL:		http://nemerle.org/
-Requires:	mono-devel >= 1.0
 BuildRequires:	mono-devel >= 1.0
 BuildRequires:	pkgconfig
+Requires:	mono-devel >= 1.0
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+ExcludeArch:	alpha
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
