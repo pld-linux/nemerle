@@ -1,18 +1,18 @@
 Summary:	Nemerle compiler
 Summary(pl):	Kompilator jêzyka Nemerle
 Name:		nemerle
-Version:	0.1.1
+Version:	0.1.2
 Release:	1
 Epoch:		0
 License:	BSD
 Group:		Development/Languages
 Vendor:		Nemerle Development Team <feedback@nemerle.org>
 Source0:	http://nemerle.org/download/%{name}-%{version}.tar.gz
-# Source0-md5:	bdc36d6c00cb6ee0615678aea90be730
+# Source0-md5:	2fb625ba4dc18063aff21754e00bb000
 BuildArch:	noarch
 URL:		http://nemerle.org/
-Requires(post):	mono >= 0.29
-Requires:	mono >= 0.29
+Requires(post):	mono >= 0.31
+Requires:	mono >= 0.31
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -82,7 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 mono --aot %{_libdir}/Nemerle.Compiler.dll || :
-mono --aot %{_libdir}/stdmacros.dll || :
+mono --aot %{_libdir}/Nemerle.Macros.dll || :
 mono --aot %{_bindir}/ncc.exe || :
 
 %post libs
@@ -90,13 +90,13 @@ mono --aot %{_libdir}/Nemerle.dll || :
 
 %files
 %defattr(644,root,root,755)
-%doc NEWS AUTHORS README doc/html/* misc/*.{vim,el}
+%doc NEWS AUTHORS README doc/html misc/*.{vim,el}
 %attr(755,root,root) %{_bindir}/ncc
 %attr(755,root,root) %{_bindir}/ncc.exe
-%attr(755,root,root) %{_libdir}/stdmacros.dll
+%attr(755,root,root) %{_libdir}/Nemerle.Macros.dll
 %attr(755,root,root) %{_libdir}/Nemerle.Compiler.dll
 %ghost %attr(755,root,root) %{_bindir}/ncc.exe.so
-%ghost %attr(755,root,root) %{_libdir}/stdmacros.dll.so
+%ghost %attr(755,root,root) %{_libdir}/Nemerle.Macros.dll.so
 %ghost %attr(755,root,root) %{_libdir}/Nemerle.Compiler.dll.so
 %{_mandir}/man1/*
 %{_examplesdir}/%{name}-%{version}
