@@ -2,13 +2,14 @@ Summary:	Nemerle compiler
 Summary(pl):	Kompilator jêzyka Nemerle
 Name:		nemerle
 Version:	0.2.1
-Release:	1
+Release:	2
 Epoch:		0
 License:	BSD
 Group:		Development/Languages
 Vendor:		Nemerle Development Team <feedback@nemerle.org>
 Source0:	http://nemerle.org/download/%{name}-%{version}.tar.bz2
 # Source0-md5:	6108697ad6a8ba434f5a98f34b8eb02e
+Patch0:		%{name}-disable-aot.patch
 URL:		http://nemerle.org/
 BuildRequires:	mono-devel >= 1.0
 BuildRequires:	pkgconfig
@@ -47,6 +48,7 @@ Biblioteki niezbêdne do uruchamiania programów napisanych w Nemerle.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 ./configure \
@@ -54,9 +56,12 @@ Biblioteki niezbêdne do uruchamiania programów napisanych w Nemerle.
 	--bindir=%{_bindir} \
 	--libdir=%{_libdir} \
 	--mandir=%{_mandir}/man1 \
+%ifnarch %{ix86}
+	--disable-aot \
+%endif
 	--net-engine=mono
-
 %{__make}
+%{__make} check
 
 %install
 rm -rf $RPM_BUILD_ROOT
