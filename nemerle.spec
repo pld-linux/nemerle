@@ -3,19 +3,19 @@
 Summary:	Nemerle compiler
 Summary(pl):	Kompilator jêzyka Nemerle
 Name:		nemerle
-Version:	0.2.10
+Version:	0.3.0
 Release:	1
 Epoch:		0
 License:	BSD
 Group:		Development/Languages
 Vendor:		Nemerle Development Team <feedback@nemerle.org>
 Source0:	http://nemerle.org/download/%{name}-%{version}.tar.bz2
-# Source0-md5:	624a5ddc352b402a9d6ced97841c02d2
+# Source0-md5:	688344722cae59d1fbb5fd286d667a61
 URL:		http://nemerle.org/
-BuildRequires:	mono-devel >= 1.1.4
+BuildRequires:	mono-devel >= 1.1.6-2
 BuildRequires:  nant
 BuildRequires:	pkgconfig
-Requires:	mono-devel >= 1.1.4
+Requires:	mono-devel >= 1.1.6-2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 ExcludeArch:	alpha
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -40,7 +40,7 @@ go.
 Summary:	Nemerle runtime environment
 Summary(pl):	¦rodowisko uruchomieniowe jêzyka Nemerle
 Group:		Libraries
-Requires:	mono >= 1.0
+Requires:	mono >= 1.1.6-2
 
 %description libs
 Libraries needed to run programs written in Nemerle.
@@ -55,9 +55,10 @@ Biblioteki niezbêdne do uruchamiania programów napisanych w Nemerle.
 ./configure \
 	--prefix=%{_prefix} \
 	--bindir=%{_bindir} \
-	--libdir=%{_libdir} \
+	--libdir=%{_prefix}/lib \
 	--mandir=%{_mandir}/man1 \
 	--disable-aot \
+	--pkgconfigdir=%{_pkgconfigdir} \
 	--net-engine=mono
 %{__make}
 %{__make} check
@@ -82,9 +83,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ncc.exe
 %attr(755,root,root) %{_bindir}/cs2n
 %attr(755,root,root) %{_bindir}/cs2n.exe
-%{_libdir}/mono/nemerle
-%{_libdir}/mono/gac/Nemerle.*
-%{_libdir}/mono/gac/antlr*
+%attr(755,root,root) %{_bindir}/nemish
+%attr(755,root,root) %{_bindir}/nemish.exe
+%{_prefix}/lib/mono/nemerle
+%{_prefix}/lib/mono/gac/Nemerle.*
+%{_prefix}/lib/mono/gac/antlr*
 %{_datadir}/NAnt/bin/Nemerle.NAnt.Tasks.*
 %{_mandir}/man1/*
 %{_pkgconfigdir}/nemerle.pc
@@ -93,4 +96,4 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %doc COPYRIGHT
-%{_libdir}/mono/gac/Nemerle
+%{_prefix}/lib/mono/gac/Nemerle
