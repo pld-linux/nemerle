@@ -10,7 +10,7 @@ License:	BSD
 Group:		Development/Languages
 Vendor:		Nemerle Development Team <feedback@nemerle.org>
 Source0:	http://nemerle.org/download/%{name}-%{version}.tar.bz2
-# Source0-md5:	37bc44b511fab24ff5e3e93fdb3dc88f
+# Source0-md5:	33263c735a6975fe8eb640fa6074aff9
 URL:		http://nemerle.org/
 BuildRequires:	mono-devel >= 1.1.6-2
 BuildRequires:  nant
