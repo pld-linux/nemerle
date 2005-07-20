@@ -12,6 +12,7 @@ Vendor:		Nemerle Development Team <feedback@nemerle.org>
 Source0:	http://nemerle.org/download/%{name}-%{version}.tar.bz2
 # Source0-md5:	33263c735a6975fe8eb640fa6074aff9
 URL:		http://nemerle.org/
+BuildRequires:	antlr
 BuildRequires:	mono-devel >= 1.1.6-2
 BuildRequires:  nant
 BuildRequires:	pkgconfig
@@ -81,14 +82,14 @@ rm -rf $RPM_BUILD_ROOT
 %doc NEWS AUTHORS README doc/html misc/*.{vim,el}
 %attr(755,root,root) %{_bindir}/ncc
 %attr(755,root,root) %{_bindir}/ncc.exe
-%attr(755,root,root) %{_bindir}/cs2n
-%attr(755,root,root) %{_bindir}/cs2n.exe
+#%attr(755,root,root) %{_bindir}/cs2n
+#%attr(755,root,root) %{_bindir}/cs2n.exe
 %attr(755,root,root) %{_bindir}/nemish
 %attr(755,root,root) %{_bindir}/nemish.exe
 %{_prefix}/lib/mono/nemerle
 %{_prefix}/lib/mono/gac/Nemerle.*
-%{_prefix}/lib/mono/gac/antlr*
-%{_datadir}/NAnt/bin/Nemerle.NAnt.Tasks.*
+#%{_prefix}/lib/mono/gac/antlr*
+#%{_datadir}/NAnt/bin/Nemerle.NAnt.Tasks.*
 %{_mandir}/man1/*
 %{_pkgconfigdir}/nemerle.pc
 %{_examplesdir}/%{name}-%{version}
