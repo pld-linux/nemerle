@@ -12,7 +12,6 @@ Vendor:		Nemerle Development Team <feedback@nemerle.org>
 Source0:	http://nemerle.org/download/%{name}-%{version}.tar.bz2
 # Source0-md5:	33263c735a6975fe8eb640fa6074aff9
 URL:		http://nemerle.org/
-BuildRequires:	antlr
 BuildRequires:	mono-devel >= 1.1.6-2
 BuildRequires:  nant
 BuildRequires:	pkgconfig
@@ -61,6 +60,7 @@ Biblioteki niezbêdne do uruchamiania programów napisanych w Nemerle.
 	--disable-aot \
 	--pkgconfigdir=%{_pkgconfigdir} \
 	--net-engine=mono
+cp -f tools/cs2n/antlr/antlr.runtime-2.7.4.dll tools/cs2n/antlr.runtime.dll
 %{__make}
 %{__make} check
 %{__make} -C snippets clean
