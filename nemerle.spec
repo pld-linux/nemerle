@@ -1,7 +1,7 @@
 # TODO: antlr should install antlr.runtime.dll, and this
 # package should use it
 Summary:	Nemerle compiler
-Summary(pl):	Kompilator jêzyka Nemerle
+Summary(pl.UTF-8):   Kompilator jÄ™zyka Nemerle
 Name:		nemerle
 Version:	0.9.0
 Release:	1
@@ -29,26 +29,26 @@ the .NET platform. Nemerle supports: object oriented and imperative
 powerful macro system. It has simple, C#-like syntax and makes access
 to imperative features easy, and thus is easy to learn.
 
-%description -l pl
-Nemerle jest nowym jêzykiem funkcjonalnym zaprojektowanym od pocz±tku 
-z my¶l± o platformie .NET. Nemerle wspiera programowanie obiektowe 
-i imperatywne, typy wariantowe, dopasowanie wzorca, funkcje wy¿szych
-rzêdów oraz potê¿ny system makr. Sk³adnia Nemerle jest prosta,
-przypomina trochê C#. Nemerle umo¿liwia ³atwy dostêp do swych
-imperatywnych oraz obiektowych cech, co powinno u³atwiæ uczenie siê
+%description -l pl.UTF-8
+Nemerle jest nowym jÄ™zykiem funkcjonalnym zaprojektowanym od poczÄ…tku 
+z myÅ›lÄ… o platformie .NET. Nemerle wspiera programowanie obiektowe 
+i imperatywne, typy wariantowe, dopasowanie wzorca, funkcje wyÅ¼szych
+rzÄ™dÃ³w oraz potÄ™Å¼ny system makr. SkÅ‚adnia Nemerle jest prosta,
+przypomina trochÄ™ C#. Nemerle umoÅ¼liwia Å‚atwy dostÄ™p do swych
+imperatywnych oraz obiektowych cech, co powinno uÅ‚atwiÄ‡ uczenie siÄ™
 go.
 
 %package libs
 Summary:	Nemerle runtime environment
-Summary(pl):	¦rodowisko uruchomieniowe jêzyka Nemerle
+Summary(pl.UTF-8):   Åšrodowisko uruchomieniowe jÄ™zyka Nemerle
 Group:		Libraries
 Requires:	mono >= 1.1.6-2
 
 %description libs
 Libraries needed to run programs written in Nemerle.
 
-%description libs -l pl
-Biblioteki niezbêdne do uruchamiania programów napisanych w Nemerle.
+%description libs -l pl.UTF-8
+Biblioteki niezbÄ™dne do uruchamiania programÃ³w napisanych w Nemerle.
 
 %prep
 %setup -q
