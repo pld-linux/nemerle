@@ -1,7 +1,7 @@
 # TODO: antlr should install antlr.runtime.dll, and this
 # package should use it
 Summary:	Nemerle compiler
-Summary(pl.UTF-8):   Kompilator języka Nemerle
+Summary(pl.UTF-8):	Kompilator języka Nemerle
 Name:		nemerle
 Version:	0.9.0
 Release:	1
@@ -40,7 +40,7 @@ go.
 
 %package libs
 Summary:	Nemerle runtime environment
-Summary(pl.UTF-8):   Środowisko uruchomieniowe języka Nemerle
+Summary(pl.UTF-8):	Środowisko uruchomieniowe języka Nemerle
 Group:		Libraries
 Requires:	mono >= 1.1.6-2
 
